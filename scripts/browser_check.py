@@ -38,7 +38,7 @@ async def main():
                 await page.screenshot(path=str(ROOT/f'build/{name}-diapositivas.png'),full_page=True)
                 await page.goto(base+'/src/03_practicas/practica-01.html')
                 async with page.expect_download() as dl:
-                    await page.get_by_text('Descargar notebook de Jupyter',exact=True).click()
+                    await page.get_by_text('Descargar Notebook',exact=True).click()
                 download=await dl.value
                 original=json.loads(Path(await download.path()).read_text())
                 assert 'NotImplementedError' in ''.join(original['cells'][2]['source'])

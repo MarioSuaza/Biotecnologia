@@ -92,7 +92,7 @@ No edites `src/03_practicas/`, `downloads/` ni `build/`. Después de modificar l
 
 ## Probar la primera práctica
 
-Abre **Prácticas → Práctica 01**. Comprueba que se ve el ejercicio y pulsa **Descargar notebook de Jupyter** para obtener la versión original sin resolver. Con **Abrir en el navegador** se abre esa práctica en JupyterLite, en otra pestaña.
+Abre **Prácticas → Práctica 01**. Comprueba que se ve el ejercicio y pulsa **Descargar Notebook** para obtener la versión original sin resolver. Con **Abrir en el navegador** se abre esa práctica en JupyterLite, en otra pestaña.
 
 Ejecuta con Shift+Enter de arriba abajo, implementa `sumar(a, b)` y ejecuta sus tests. Inicialmente aparecen errores por `NotImplementedError`. `FAIL` muestra un resultado incorrecto; `ERROR` una excepción; `OK` confirma los cuatro métodos de prueba (positivos, negativos, cero y signos distintos). Tras editar la función ejecuta de nuevo su celda antes de los tests. Los tests son modificables, no exhaustivos, de autocomprobación y no envían nada al profesor.
 

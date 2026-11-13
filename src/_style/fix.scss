@@ -1,5 +1,12 @@
 /*-- scss:rules --*/
 
+.practice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-bottom: 1.5rem;
+}
+
 .course-presentation {
   position: fixed;
   right: 1rem;

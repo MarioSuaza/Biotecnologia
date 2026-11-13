@@ -21,8 +21,10 @@ def generate():
                 raise ValueError(f"Limpia las salidas antes de distribuir {path.name}")
         title = "".join(nb["cells"][0]["source"]).strip().removeprefix("# ")
         lines = [f'---\ntitle: "{title}"\nformat: html\nexecute:\n  enabled: false\n---\n',
-                 f'<a class="btn btn-primary" href="../../downloads/{path.name}" download="{path.name}">Descargar notebook de Jupyter</a>\n',
-                 f'<a class="btn btn-outline-primary" href="../../lite/lab/index.html?path={path.name}" target="_blank" rel="noopener">Abrir en el navegador</a>\n',
+                 '```{=html}\n<div class="practice-actions">\n'
+                 f'<a class="btn btn-primary" href="../../downloads/{path.name}" download="{path.name}">Descargar Notebook</a>\n'
+                 f'<a class="btn btn-primary" href="../../lite/lab/index.html?path={path.name}" target="_blank" rel="noopener">Abrir en el navegador</a>\n'
+                 '</div>\n```\n',
                  '::: {.callout-note title="Dónde ejecutar el código"}\n'
                  'Esta página muestra las instrucciones y el código, pero no ejecuta Python. '
                  'Pulsa **Abrir en el navegador** para editar y ejecutar las celdas en JupyterLite, '

@@ -18,7 +18,7 @@ for path in notebooks:
     assert all(c.execution_count is None and not c.outputs for c in nb.cells if c.cell_type == 'code')
     assert path.read_bytes() == (root/'_output/downloads'/path.name).read_bytes()
     page = (root/'_output/src/03_practicas'/(path.stem+'.html')).read_text()
-    assert 'Descargar notebook de Jupyter' in page and 'Abrir en el navegador' in page
+    assert 'Descargar Notebook' in page and 'Abrir en el navegador' in page
     assert (root/'_output/lite/files'/path.name).is_file()
 nb = nbformat.read(notebooks[0], as_version=4)
 code_cells = [c.source for c in nb.cells if c.cell_type == 'code']
