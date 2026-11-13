@@ -1,0 +1,652 @@
+{
+  "curso-practica-01": {
+    "data": {
+      "layout-restorer:data": {
+        "down": {
+          "collapsed": true,
+          "size": 0,
+          "widgets": []
+        },
+        "left": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "filebrowser",
+            "running-sessions",
+            "@jupyterlab/toc:plugin"
+          ]
+        },
+        "main": {
+          "current": "notebook:practica-01.ipynb",
+          "dock": null
+        },
+        "relativeSizes": [
+          0,
+          1,
+          0
+        ],
+        "right": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "jp-property-inspector"
+          ]
+        },
+        "top": {
+          "simpleVisibility": true
+        }
+      },
+      "notebook:practica-01.ipynb": {
+        "data": {
+          "factory": "Notebook",
+          "path": "practica-01.ipynb"
+        }
+      }
+    },
+    "metadata": {
+      "id": "curso-practica-01"
+    }
+  },
+  "curso-practica-02": {
+    "data": {
+      "layout-restorer:data": {
+        "down": {
+          "collapsed": true,
+          "size": 0,
+          "widgets": []
+        },
+        "left": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "filebrowser",
+            "running-sessions",
+            "@jupyterlab/toc:plugin"
+          ]
+        },
+        "main": {
+          "current": "notebook:practica-02.ipynb",
+          "dock": null
+        },
+        "relativeSizes": [
+          0,
+          1,
+          0
+        ],
+        "right": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "jp-property-inspector"
+          ]
+        },
+        "top": {
+          "simpleVisibility": true
+        }
+      },
+      "notebook:practica-02.ipynb": {
+        "data": {
+          "factory": "Notebook",
+          "path": "practica-02.ipynb"
+        }
+      }
+    },
+    "metadata": {
+      "id": "curso-practica-02"
+    }
+  },
+  "curso-practica-03": {
+    "data": {
+      "layout-restorer:data": {
+        "down": {
+          "collapsed": true,
+          "size": 0,
+          "widgets": []
+        },
+        "left": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "filebrowser",
+            "running-sessions",
+            "@jupyterlab/toc:plugin"
+          ]
+        },
+        "main": {
+          "current": "notebook:practica-03.ipynb",
+          "dock": null
+        },
+        "relativeSizes": [
+          0,
+          1,
+          0
+        ],
+        "right": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "jp-property-inspector"
+          ]
+        },
+        "top": {
+          "simpleVisibility": true
+        }
+      },
+      "notebook:practica-03.ipynb": {
+        "data": {
+          "factory": "Notebook",
+          "path": "practica-03.ipynb"
+        }
+      }
+    },
+    "metadata": {
+      "id": "curso-practica-03"
+    }
+  },
+  "curso-practica-04": {
+    "data": {
+      "layout-restorer:data": {
+        "down": {
+          "collapsed": true,
+          "size": 0,
+          "widgets": []
+        },
+        "left": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "filebrowser",
+            "running-sessions",
+            "@jupyterlab/toc:plugin"
+          ]
+        },
+        "main": {
+          "current": "notebook:practica-04.ipynb",
+          "dock": null
+        },
+        "relativeSizes": [
+          0,
+          1,
+          0
+        ],
+        "right": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "jp-property-inspector"
+          ]
+        },
+        "top": {
+          "simpleVisibility": true
+        }
+      },
+      "notebook:practica-04.ipynb": {
+        "data": {
+          "factory": "Notebook",
+          "path": "practica-04.ipynb"
+        }
+      }
+    },
+    "metadata": {
+      "id": "curso-practica-04"
+    }
+  },
+  "curso-practica-05": {
+    "data": {
+      "layout-restorer:data": {
+        "down": {
+          "collapsed": true,
+          "size": 0,
+          "widgets": []
+        },
+        "left": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "filebrowser",
+            "running-sessions",
+            "@jupyterlab/toc:plugin"
+          ]
+        },
+        "main": {
+          "current": "notebook:practica-05.ipynb",
+          "dock": null
+        },
+        "relativeSizes": [
+          0,
+          1,
+          0
+        ],
+        "right": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "jp-property-inspector"
+          ]
+        },
+        "top": {
+          "simpleVisibility": true
+        }
+      },
+      "notebook:practica-05.ipynb": {
+        "data": {
+          "factory": "Notebook",
+          "path": "practica-05.ipynb"
+        }
+      }
+    },
+    "metadata": {
+      "id": "curso-practica-05"
+    }
+  },
+  "curso-practica-06": {
+    "data": {
+      "layout-restorer:data": {
+        "down": {
+          "collapsed": true,
+          "size": 0,
+          "widgets": []
+        },
+        "left": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "filebrowser",
+            "running-sessions",
+            "@jupyterlab/toc:plugin"
+          ]
+        },
+        "main": {
+          "current": "notebook:practica-06.ipynb",
+          "dock": null
+        },
+        "relativeSizes": [
+          0,
+          1,
+          0
+        ],
+        "right": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "jp-property-inspector"
+          ]
+        },
+        "top": {
+          "simpleVisibility": true
+        }
+      },
+      "notebook:practica-06.ipynb": {
+        "data": {
+          "factory": "Notebook",
+          "path": "practica-06.ipynb"
+        }
+      }
+    },
+    "metadata": {
+      "id": "curso-practica-06"
+    }
+  },
+  "curso-practica-07": {
+    "data": {
+      "layout-restorer:data": {
+        "down": {
+          "collapsed": true,
+          "size": 0,
+          "widgets": []
+        },
+        "left": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "filebrowser",
+            "running-sessions",
+            "@jupyterlab/toc:plugin"
+          ]
+        },
+        "main": {
+          "current": "notebook:practica-07.ipynb",
+          "dock": null
+        },
+        "relativeSizes": [
+          0,
+          1,
+          0
+        ],
+        "right": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "jp-property-inspector"
+          ]
+        },
+        "top": {
+          "simpleVisibility": true
+        }
+      },
+      "notebook:practica-07.ipynb": {
+        "data": {
+          "factory": "Notebook",
+          "path": "practica-07.ipynb"
+        }
+      }
+    },
+    "metadata": {
+      "id": "curso-practica-07"
+    }
+  },
+  "curso-practica-08": {
+    "data": {
+      "layout-restorer:data": {
+        "down": {
+          "collapsed": true,
+          "size": 0,
+          "widgets": []
+        },
+        "left": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "filebrowser",
+            "running-sessions",
+            "@jupyterlab/toc:plugin"
+          ]
+        },
+        "main": {
+          "current": "notebook:practica-08.ipynb",
+          "dock": null
+        },
+        "relativeSizes": [
+          0,
+          1,
+          0
+        ],
+        "right": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "jp-property-inspector"
+          ]
+        },
+        "top": {
+          "simpleVisibility": true
+        }
+      },
+      "notebook:practica-08.ipynb": {
+        "data": {
+          "factory": "Notebook",
+          "path": "practica-08.ipynb"
+        }
+      }
+    },
+    "metadata": {
+      "id": "curso-practica-08"
+    }
+  },
+  "curso-practica-09": {
+    "data": {
+      "layout-restorer:data": {
+        "down": {
+          "collapsed": true,
+          "size": 0,
+          "widgets": []
+        },
+        "left": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "filebrowser",
+            "running-sessions",
+            "@jupyterlab/toc:plugin"
+          ]
+        },
+        "main": {
+          "current": "notebook:practica-09.ipynb",
+          "dock": null
+        },
+        "relativeSizes": [
+          0,
+          1,
+          0
+        ],
+        "right": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "jp-property-inspector"
+          ]
+        },
+        "top": {
+          "simpleVisibility": true
+        }
+      },
+      "notebook:practica-09.ipynb": {
+        "data": {
+          "factory": "Notebook",
+          "path": "practica-09.ipynb"
+        }
+      }
+    },
+    "metadata": {
+      "id": "curso-practica-09"
+    }
+  },
+  "curso-practica-10": {
+    "data": {
+      "layout-restorer:data": {
+        "down": {
+          "collapsed": true,
+          "size": 0,
+          "widgets": []
+        },
+        "left": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "filebrowser",
+            "running-sessions",
+            "@jupyterlab/toc:plugin"
+          ]
+        },
+        "main": {
+          "current": "notebook:practica-10.ipynb",
+          "dock": null
+        },
+        "relativeSizes": [
+          0,
+          1,
+          0
+        ],
+        "right": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "jp-property-inspector"
+          ]
+        },
+        "top": {
+          "simpleVisibility": true
+        }
+      },
+      "notebook:practica-10.ipynb": {
+        "data": {
+          "factory": "Notebook",
+          "path": "practica-10.ipynb"
+        }
+      }
+    },
+    "metadata": {
+      "id": "curso-practica-10"
+    }
+  },
+  "curso-practica-11": {
+    "data": {
+      "layout-restorer:data": {
+        "down": {
+          "collapsed": true,
+          "size": 0,
+          "widgets": []
+        },
+        "left": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "filebrowser",
+            "running-sessions",
+            "@jupyterlab/toc:plugin"
+          ]
+        },
+        "main": {
+          "current": "notebook:practica-11.ipynb",
+          "dock": null
+        },
+        "relativeSizes": [
+          0,
+          1,
+          0
+        ],
+        "right": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "jp-property-inspector"
+          ]
+        },
+        "top": {
+          "simpleVisibility": true
+        }
+      },
+      "notebook:practica-11.ipynb": {
+        "data": {
+          "factory": "Notebook",
+          "path": "practica-11.ipynb"
+        }
+      }
+    },
+    "metadata": {
+      "id": "curso-practica-11"
+    }
+  },
+  "curso-practica-12": {
+    "data": {
+      "layout-restorer:data": {
+        "down": {
+          "collapsed": true,
+          "size": 0,
+          "widgets": []
+        },
+        "left": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "filebrowser",
+            "running-sessions",
+            "@jupyterlab/toc:plugin"
+          ]
+        },
+        "main": {
+          "current": "notebook:practica-12.ipynb",
+          "dock": null
+        },
+        "relativeSizes": [
+          0,
+          1,
+          0
+        ],
+        "right": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "jp-property-inspector"
+          ]
+        },
+        "top": {
+          "simpleVisibility": true
+        }
+      },
+      "notebook:practica-12.ipynb": {
+        "data": {
+          "factory": "Notebook",
+          "path": "practica-12.ipynb"
+        }
+      }
+    },
+    "metadata": {
+      "id": "curso-practica-12"
+    }
+  },
+  "curso-practica-13": {
+    "data": {
+      "layout-restorer:data": {
+        "down": {
+          "collapsed": true,
+          "size": 0,
+          "widgets": []
+        },
+        "left": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "filebrowser",
+            "running-sessions",
+            "@jupyterlab/toc:plugin"
+          ]
+        },
+        "main": {
+          "current": "notebook:practica-13.ipynb",
+          "dock": null
+        },
+        "relativeSizes": [
+          0,
+          1,
+          0
+        ],
+        "right": {
+          "collapsed": true,
+          "visible": false,
+          "widgetStates": {},
+          "widgets": [
+            "jp-property-inspector"
+          ]
+        },
+        "top": {
+          "simpleVisibility": true
+        }
+      },
+      "notebook:practica-13.ipynb": {
+        "data": {
+          "factory": "Notebook",
+          "path": "practica-13.ipynb"
+        }
+      }
+    },
+    "metadata": {
+      "id": "curso-practica-13"
+    }
+  }
+}
