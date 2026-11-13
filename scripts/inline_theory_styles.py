@@ -2,6 +2,7 @@
 import base64
 from html import unescape
 from html.parser import HTMLParser
+import json
 import mimetypes
 from pathlib import Path
 import re
@@ -9,6 +10,9 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "_output"
+FONT_IMPORT = re.compile(
+    r'''@import\s*(?:url\(\s*)?(["'])(https://fonts\.googleapis\.com/[^"']+)\1\s*\)?\s*;'''
+)
 
 
 def data_uri(path):
@@ -31,6 +35,7 @@ class Styles(HTMLParser):
         super().__init__(convert_charrefs=False)
         self.page = page
         self.replacements = {}
+        self.fonts = set()
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
@@ -42,6 +47,12 @@ class Styles(HTMLParser):
             return
         css = path.read_text()
 
+        def defer_font(match):
+            self.fonts.add(match.group(2))
+            return ""
+
+        css = FONT_IMPORT.sub(defer_font, css)
+
         def embed_asset(match):
             url = match.group(1).strip().strip("\"'")
             asset = local_path(path.parent, url)
@@ -51,12 +62,51 @@ class Styles(HTMLParser):
             return 'url("' + data_uri(asset) + ("#" + fragment if fragment else "") + '")'
 
         css = re.sub(r"url\(([^)]+)\)", embed_asset, css)
-        uri = "data:text/css;base64," + base64.b64encode(css.encode()).decode()
         original = self.get_starttag_text()
-        # Mantener <link>, sus identificadores y clases para el selector claro/oscuro de Quarto.
-        self.replacements[original] = re.sub(
-            r'\bhref\s*=\s*([\"\']).*?\1', lambda _: f'href="{uri}"', original, count=1,
+        # Quarto usa estos <link> como controles del tema. El CSS real es un <style>
+        # independiente: no depende de permitir hojas de estilo con direcciones data:.
+        control = re.sub(
+            r'\bhref\s*=\s*([\"\']).*?\1', 'href="data:text/css,"', original, count=1,
         )
+        classes = attrs.get("class", "").split()
+        if "quarto-color-scheme-extra" in classes:
+            self.replacements[original] = control
+            return
+        alternate = "quarto-color-alternate" in classes
+        mode = "alternate" if alternate else "primary"
+        media = "not all" if alternate else "all"
+        self.replacements[original] = (
+            f'<style data-course-style="{mode}" media="{media}">\n{css}\n</style>\n' + control
+        )
+
+
+def theme_and_fonts(fonts):
+    return """<script id="course-inline-style-controller">
+(() => {
+  const syncTheme = () => {
+    const dark = document.body?.classList.contains('quarto-dark') ?? false;
+    document.querySelectorAll('style[data-course-style="alternate"]').forEach(style => {
+      style.media = dark ? 'all' : 'not all';
+    });
+  };
+  new MutationObserver(syncTheme).observe(document.documentElement, {
+    subtree: true, childList: true, attributes: true, attributeFilter: ['class']
+  });
+  syncTheme();
+  window.addEventListener('load', () => {
+    const fonts = FONT_URLS;
+    fonts.forEach(url => {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = url;
+      link.media = 'print';
+      link.onload = () => { link.media = 'all'; };
+      document.head.append(link);
+    });
+  }, { once: true });
+})();
+</script>
+""".replace("FONT_URLS", json.dumps(sorted(fonts)))
 
 
 def inline_styles():
@@ -70,6 +120,7 @@ def inline_styles():
         for before, after in parser.replacements.items():
             text = text.replace(before, after)
         if parser.replacements:
+            text = text.replace("</head>", theme_and_fonts(parser.fonts) + "</head>", 1)
             page.write_text(text)
             count += 1
     print(f"Páginas de teoría con estilos integrados: {count}.")

@@ -55,13 +55,27 @@ class Links(HTMLParser):
         super().__init__()
         self.links = []
         self.anchors = []
+        self.inline_styles = 0
+        self.style_contents = []
+        self.in_inline_style = False
 
     def handle_starttag(self, tag, attrs):
+        if tag == 'style' and 'data-course-style' in dict(attrs):
+            self.inline_styles += 1
+            self.in_inline_style = True
         if tag == 'a':
             self.anchors.append(dict(attrs))
         for key, value in attrs:
             if key in ('href', 'src') and value:
                 self.links.append(value)
+
+    def handle_endtag(self, tag):
+        if tag == 'style':
+            self.in_inline_style = False
+
+    def handle_data(self, data):
+        if self.in_inline_style:
+            self.style_contents.append(data)
 
 
 checked = 0
@@ -70,6 +84,8 @@ for page in [OUTPUT / 'index.html', *OUTPUT.glob('src/**/*.html')]:
     parser.feed(page.read_text())
     if page.parent.name == '01_teoria' and not page.name.endswith('.reveal.html'):
         assert not any(urlsplit(link).path.endswith('.css') for link in parser.links if not link.startswith('data:')), page
+        assert parser.inline_styles >= 6, f'Faltan estilos directos en {page}'
+        assert '@import' not in ''.join(parser.style_contents), f'CSS bloqueante en {page}'
     if page.parent.name == '03_practicas':
         notebook_name = page.stem + '.ipynb'
         assert any(a.get('download') == notebook_name and a.get('href') == '../../downloads/' + notebook_name

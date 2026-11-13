@@ -120,7 +120,7 @@ Al compilar:
 2. Quarto genera las páginas web y las presentaciones.
 3. `scripts/build_lite.py` construye JupyterLite con sus notebooks.
 4. `scripts/preserve_assets.py` conserva recursos de la publicación anterior para páginas en caché.
-5. `scripts/inline_theory_styles.py` integra el CSS en los HTML de teoría para conservar el diseño aunque falle una descarga externa de estilos.
+5. `scripts/inline_theory_styles.py` integra el CSS directamente en bloques `<style>` de los HTML de teoría. El diseño no depende de hojas CSS con direcciones `data:`; las fuentes de Google se solicitan después de cargar la página y no bloquean su formato. El controlador mantiene los temas claro y oscuro sincronizados con Quarto.
 
 La teoría conserva el botón **Ver diapositivas** abajo a la derecha y el enlace **Otros formatos → RevealJS**. En la presentación usa flechas para avanzar, **F** para pantalla completa y **Esc** para la vista general.
 
