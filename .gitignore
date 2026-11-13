@@ -1,14 +1,40 @@
+# Salidas de Quarto y JupyterLite (se publican únicamente en gh-pages).
 /_output/
 /.quarto/
-/.venv/
 /build/
 /downloads/
+/site_libs/
+/index.html
+/search.json
+/listings.json
+/src/**/*.html
+/src/**/site_libs/
 /src/03_practicas/*.qmd
+
+# Documentación interna y herramientas locales de validación.
+/docs/
+/scripts/*
+!/scripts/generate.py
+!/scripts/build_lite.py
+!/scripts/check.py
+!/scripts/clean.py
+/requirements-browser.txt
+
+# Entornos, cachés y archivos de trabajo.
+/.venv/
+/venv/
 __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
 .DS_Store
 .vscode/
+.idea/
+/.agents/
+/.codex/
+/.aws/
 .env
 .env.*
 

@@ -1,6 +1,6 @@
 # Plantilla de curso con Quarto y notebooks
 
-Proyecto independiente para escribir un curso nuevo con 13 clases de teoría, 13 prácticas y 4 tareas. Conserva la estructura técnica y el diseño general de la referencia, sin su contenido académico. Solo la práctica 01 tiene un ejercicio mínimo de validación. Consulta `ATTRIBUTION.md`, `docs/ANALISIS.md` y `docs/VALIDACION.md`.
+Proyecto independiente para escribir un curso nuevo con 13 clases de teoría, 13 prácticas y 4 tareas. Conserva la estructura técnica y el diseño general de la referencia, sin su contenido académico. Solo la práctica 01 tiene un ejercicio mínimo de validación. Consulta `ATTRIBUTION.md` para la autoría y los recursos reutilizados.
 
 ## Requisitos e instalación
 
@@ -24,7 +24,7 @@ quarto preview --host localhost --port 7777
 
 Abre <http://localhost:7777/>. Detén el servidor con Ctrl+C. En Windows usa `py -m venv .venv`, `.venv\Scripts\Activate.ps1` y `python` en lugar de `python3`; en los hooks de `_quarto.yml` sustituye también `python3` por `python` si tu instalación no ofrece ese alias. La adaptación a Windows no está comprobada.
 
-`requirements.txt` declara las dependencias directas; `requirements.lock` fija también sus dependencias transitivas. Para actualizar, hazlo en un entorno virtual limpio, valida de nuevo y regenera el lock con `python -m pip freeze > requirements.lock`. Las herramientas de prueba del navegador se instalan aparte, con `requirements-browser.txt`.
+`requirements.txt` declara las dependencias directas; `requirements.lock` fija también sus dependencias transitivas. Para actualizar, hazlo en un entorno virtual limpio, valida de nuevo y regenera el lock con `python -m pip freeze > requirements.lock`.
 
 JupyterLite necesita el extra de construcción `jupyterlite-core[contents]`, que instala `jupyter-server` para indexar los archivos. No se inicia ese servidor ni se publica Python del servidor: el resultado es HTML/JS/Wasm estático.
 
@@ -61,13 +61,14 @@ La teoría conserva además salida Reveal.js. En cada página de teoría, pulsa 
 ├── lite/jupyter-lite.json       # configuración de JupyterLite
 ├── scripts/                     # generación, construcción y comprobación
 ├── _extensions/tldraw/          # complemento de las diapositivas
-├── docs/                        # análisis y evidencias de validación
 ├── downloads/                   # generado: copias literales para descargar
 ├── build/lite-content/          # generado: notebooks con metadata del kernel web
 └── _output/                     # generado: sitio publicable completo
 ```
 
-No se versionan entornos, cachés, salidas, credenciales ni archivos generados. `flake.nix` y su lock se conservan como alternativa opcional del original (Nix, Linux x86_64; no comprobada en esta entrega). Esa alternativa proporciona Quarto y utilidades; también necesitas Python y las dependencias anteriores. No es requisito usar Nix.
+No se versionan entornos, cachés, salidas, credenciales, documentación interna (`docs/`) ni herramientas locales de prueba del navegador. Los cuatro scripts publicados son necesarios para generar, compilar, comprobar y limpiar el curso; `_quarto.yml`, Makefile y justfile los utilizan. `.gitignore` excluye los demás archivos de `scripts/`.
+
+El código fuente se mantiene en `main`; el sitio generado, incluidos sus recursos y descargas, se publica en `gh-pages`. `flake.nix` y su lock se conservan como alternativa opcional del original (Nix, Linux x86_64; no comprobada en esta entrega). Esa alternativa proporciona Quarto y utilidades; también necesitas Python y las dependencias anteriores. No es requisito usar Nix.
 
 ## Escribir y reorganizar el curso
 
@@ -104,7 +105,7 @@ Para trabajar localmente, abre el `.ipynb` en VS Code con extensiones Python/Jup
 
 ## Qué permite JupyterLite y cómo conservar el trabajo
 
-El entorno distribuido por este proyecto ejecuta Python con Pyodide dentro del navegador. El servidor solo entrega archivos estáticos. No usa una instancia pública de demostración. La configuración predeterminada del kernel descarga Pyodide y sus paquetes desde CDN: **no se promete funcionamiento sin Internet**. La descarga inicial es considerable; consulta las mediciones concretas en `docs/VALIDACION.md`.
+El entorno distribuido por este proyecto ejecuta Python con Pyodide dentro del navegador. El servidor solo entrega archivos estáticos. No usa una instancia pública de demostración. La configuración predeterminada del kernel descarga Pyodide y sus paquetes desde CDN: **no se promete funcionamiento sin Internet**. La descarga inicial puede tardar; depende de la conexión y de la caché del navegador.
 
 Puedes editar, ejecutar ejemplos y tests sin cambiar los originales publicados. JupyterLite guarda las copias modificadas en el almacenamiento de ese navegador (normalmente IndexedDB), asociado al origen y ruta base. La memoria del kernel y sus variables no persisten: tras recargar vuelve a ejecutar las celdas. El guardado no sincroniza dispositivos, perfiles ni navegadores; modo privado, borrado de datos, cuotas o políticas del navegador pueden perderlo. Descarga copias periódicas.
 
@@ -152,15 +153,7 @@ La URL real la proporciona GitHub Pages: para un repositorio de proyecto tiene l
 
 `python scripts/check.py` comprueba conteos, formato de notebooks, igualdad de descargas, originales limpios, tests con implementaciones pendiente/incorrecta/correcta, recursos y enlaces relativos del HTML.
 
-Prueba opcional reproducible en navegadores (descarga de notebook, kernel real, tests, exportación y recarga):
-
-```bash
-python -m pip install -r requirements-browser.txt
-python -m playwright install chromium firefox
-python scripts/browser_check.py
-```
-
-Genera resultados y capturas en `build/`; no modifica los notebooks fuente.
+Para comprobar el recorrido del alumno, abre la práctica 01, descarga el notebook, ejecútalo en JupyterLite, guarda y exporta tu respuesta. Comprueba también que la copia publicada sigue sin resolver.
 
 - **`quarto` no encontrado:** instala Quarto y vuelve a abrir la terminal.
 - **Falta `jupyter` o el kernel al compilar:** activa `.venv` antes de ejecutar Quarto e instala las dependencias completas, incluido `[contents]`.
