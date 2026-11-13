@@ -66,7 +66,9 @@ La teoría conserva además salida Reveal.js. En cada página de teoría, pulsa 
 └── _output/                     # generado: sitio publicable completo
 ```
 
-No se versionan entornos, cachés, salidas, credenciales, documentación interna (`docs/`) ni herramientas locales de prueba del navegador. Los cuatro scripts publicados son necesarios para generar, compilar, comprobar y limpiar el curso; `_quarto.yml`, Makefile y justfile los utilizan. `.gitignore` excluye los demás archivos de `scripts/`.
+No se versionan entornos, cachés, salidas, credenciales, documentación interna (`docs/`) ni herramientas locales de prueba del navegador. Los scripts publicados permiten generar, compilar, comprobar y limpiar el curso, además de conservar recursos de publicaciones anteriores para las páginas que sigan en caché. `_quarto.yml`, Makefile y justfile los utilizan. `.gitignore` excluye los demás archivos de `scripts/`.
+
+Antes de compilar una actualización para publicar, ejecuta `git fetch origin gh-pages`. El hook `scripts/preserve_assets.py` conserva los archivos de `site_libs/` de esa publicación que ya no genera la nueva compilación. Así, las páginas antiguas que aún tengan los navegadores o la CDN pueden seguir cargando sus estilos y scripts. Estos recursos se mantienen en `gh-pages`, no en el código fuente de `main`.
 
 El código fuente se mantiene en `main`; el sitio generado, incluidos sus recursos y descargas, se publica en `gh-pages`. `flake.nix` y su lock se conservan como alternativa opcional del original (Nix, Linux x86_64; no comprobada en esta entrega). Esa alternativa proporciona Quarto y utilidades; también necesitas Python y las dependencias anteriores. No es requisito usar Nix.
 

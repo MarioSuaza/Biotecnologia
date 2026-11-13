@@ -16,6 +16,7 @@ project:
     - python3 scripts/generate.py
   post-render:
     - python3 scripts/build_lite.py
+    - python3 scripts/preserve_assets.py
   resources:
     - downloads/**
     - .nojekyll

@@ -18,6 +18,7 @@
 !/scripts/build_lite.py
 !/scripts/check.py
 !/scripts/clean.py
+!/scripts/preserve_assets.py
 /requirements-browser.txt
 
 # Entornos, cachés y archivos de trabajo.
