@@ -19,6 +19,7 @@
 !/scripts/check.py
 !/scripts/clean.py
 !/scripts/preserve_assets.py
+!/scripts/inline_theory_styles.py
 /requirements-browser.txt
 
 # Entornos, cachés y archivos de trabajo.

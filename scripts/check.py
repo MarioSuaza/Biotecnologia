@@ -39,6 +39,10 @@ output = root/'_output'
 checked=0
 for page in [output/'index.html', *output.glob('src/**/*.html')]:
     parser=Links(); parser.feed(page.read_text())
+    if page.parent.name == '01_teoria' and not page.name.endswith('.reveal.html'):
+        # La teoría debe conservar su diseño aunque no se descarguen CSS externos.
+        assert not any(urlsplit(link).path.endswith('.css')
+                       for link in parser.links if not link.startswith('data:')), page
     if page.parent.name == '03_practicas':
         notebook = page.stem + '.ipynb'
         assert any(a.get('download') == notebook and

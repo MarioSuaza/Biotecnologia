@@ -17,6 +17,7 @@ project:
   post-render:
     - python3 scripts/build_lite.py
     - python3 scripts/preserve_assets.py
+    - python3 scripts/inline_theory_styles.py
   resources:
     - downloads/**
     - .nojekyll

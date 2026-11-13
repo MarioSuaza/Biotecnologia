@@ -44,6 +44,8 @@ Equivalentes opcionales: `make run`, `make build`, `make check`, `just preview`,
 
 La teoría conserva además salida Reveal.js. En cada página de teoría, pulsa **Ver diapositivas**, abajo a la derecha; también está el enlace **Otros formatos → RevealJS**. Dentro de la presentación, usa las flechas para avanzar, `F` para pantalla completa y `Esc` para la vista general. Para compilar solo una presentación: `quarto render src/01_teoria/teoria-01.qmd --to revealjs`. Usa el render completo para preparar una publicación.
 
+El post-render integra las hojas de estilo y sus fuentes locales en cada HTML de teoría mediante `scripts/inline_theory_styles.py`. El diseño y los temas claro/oscuro pueden mostrarse aunque falle la descarga de CSS externo; las fuentes de Google siguen siendo opcionales y tienen familias de sustitución.
+
 ## Organización
 
 ```text
