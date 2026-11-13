@@ -13,7 +13,7 @@ La función está sin resolver: las pruebas fallarán hasta implementarla correc
 ```{python}
 def sumar(a, b):
     # TODO: escribe aquí tu implementación
-    return a + b
+    raise NotImplementedError("Implementa sumar")
 ```
 
 ## Autocomprobación

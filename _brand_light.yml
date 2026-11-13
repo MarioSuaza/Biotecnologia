@@ -28,13 +28,13 @@ logo:
   images:
     logo_uz:
       path: ./src/_style/logos/logo_uz.svg
-      alt: "Unizar logo, black"
+      alt: "Logotipo de la Universidad de Zaragoza"
     unizar-black:
       path: ./src/_style/logos/unizar-black.svg
-      alt: "Unizar logo, black"
+      alt: "Emblema de la Universidad de Zaragoza"
     unizar-diis-white:
       path: ./src/_style/logos/unizar-diis-white.svg
-      alt: "Unizar logo, black"
+      alt: "Logotipo de la Universidad de Zaragoza y del Departamento de Informática e Ingeniería de Sistemas"
   small: unizar-diis-white
   medium: logo_uz
   large: unizar-black

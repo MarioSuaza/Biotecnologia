@@ -49,14 +49,28 @@ for source in sources:
         nbformat.validate(actual)
         assert actual == expected, (source, folder)
 
-notebook = nbformat.read(ROOT / 'downloads/practica-01.ipynb', as_version=4)
-cells = [cell.source for cell in notebook.cells if cell.cell_type == 'code']
-for solution, expected in [(cells[0], False), ('def sumar(a,b): return a-b', False), ('def sumar(a,b): return a+b', True)]:
+# Ninguna práctica debe publicarse resuelta: si define `resultado` con sus tests,
+# el notebook tal como se entrega tiene que fallarlos.
+with_tests = 0
+for source in sources:
+    notebook = nbformat.read(ROOT / 'downloads' / (source.stem + '.ipynb'), as_version=4)
     namespace = {}
     with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
-        exec(solution, namespace)
-        exec(cells[1], namespace)
-    assert namespace['resultado'].wasSuccessful() is expected
+        for cell in notebook.cells:
+            if cell.cell_type != 'code':
+                continue
+            try:
+                exec(cell.source, namespace)
+            except ModuleNotFoundError as error:
+                raise AssertionError(f'{source.name}: instala {error.name} en .venv para comprobar sus tests') from error
+            except Exception:
+                pass  # Un ejercicio sin resolver puede lanzar excepciones; los tests lo registran.
+    if 'resultado' not in namespace:
+        continue
+    assert hasattr(namespace['resultado'], 'wasSuccessful'), f'{source.name}: `resultado` debe ser el resultado de unittest'
+    assert not namespace['resultado'].wasSuccessful(), (
+        f'{source.name} contiene la solución: sus tests pasan sin que el estudiante haga nada')
+    with_tests += 1
 
 
 class Links(HTMLParser):
@@ -110,4 +124,4 @@ for page in [OUTPUT / 'index.html', *OUTPUT.glob('src/**/*.html')]:
         target = (page.parent / unquote(url.path)).resolve()
         assert target.is_relative_to(OUTPUT.resolve()) and target.exists(), (page, href, target)
         checked += 1
-print(f'OK: {len(sources)} prácticas QMD y notebooks coherentes; tests pendiente/incorrecto/correcto; {checked} enlaces y recursos existentes.')
+print(f'OK: {len(sources)} prácticas QMD y notebooks coherentes; {with_tests} con tests y sin resolver; {checked} enlaces y recursos existentes.')
