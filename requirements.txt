@@ -1,3 +1,5 @@
 jupyterlite-core[contents]==0.8.7
 jupyterlite-pyodide-kernel==0.8.7
 nbformat==5.11.1
+ipykernel==7.4.0
+PyYAML==6.0.3

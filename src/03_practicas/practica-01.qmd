@@ -1,0 +1,52 @@
+---
+title: "Práctica 01"
+---
+
+## Objetivo e instrucciones
+
+Comprobar el recorrido web → notebook → código → pruebas → descarga.
+Implementa `sumar(a, b)` para devolver la suma de dos números. Por ejemplo, `sumar(2, 3)` debe devolver `5`.
+
+Selecciona una celda y pulsa **Shift+Enter** para ejecutarla. Ejecuta de arriba abajo.
+La función está sin resolver: las pruebas fallarán hasta implementarla correctamente.
+
+```{python}
+def sumar(a, b):
+    # TODO: escribe aquí tu implementación
+    raise NotImplementedError("Implementa sumar")
+```
+
+## Autocomprobación
+
+Ejecuta primero tu función y después esta celda. `OK` indica que los casos incluidos pasan.
+`FAIL` significa que un resultado difiere del esperado; `ERROR` indica una excepción (como el ejercicio sin resolver).
+Lee el caso indicado, modifica la función y vuelve a ejecutar ambas celdas.
+Estos tests visibles son una ayuda, no una evaluación protegida ni exhaustiva.
+
+```{python}
+import unittest
+import sys
+
+class TestSumar(unittest.TestCase):
+    def test_positivos(self):
+        self.assertEqual(sumar(2, 3), 5)
+    def test_negativos(self):
+        self.assertEqual(sumar(-2, -3), -5)
+    def test_cero(self):
+        self.assertEqual(sumar(0, 0), 0)
+        self.assertEqual(sumar(4, 0), 4)
+    def test_signos_distintos(self):
+        self.assertEqual(sumar(-2, 3), 1)
+
+resultado = unittest.TextTestRunner(stream=sys.stdout, verbosity=2).run(
+    unittest.defaultTestLoader.loadTestsFromTestCase(TestSumar)
+)
+print("Todas las pruebas superadas" if resultado.wasSuccessful()
+      else "Revisa tu función y vuelve a ejecutar las dos celdas")
+```
+
+## Guardar tu trabajo
+
+En JupyterLite pulsa **Ctrl+S** (o **Cmd+S**) y usa **File → Download** para descargar el notebook modificado.
+Guarda una copia en tu equipo. El almacenamiento del navegador no es una entrega ni una copia de seguridad.
+En JupyterLab local guarda con File → Save Notebook; en VS Code usa Guardar.

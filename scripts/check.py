@@ -1,60 +1,88 @@
-"""Validación estructural, notebooks, tests locales y enlaces del sitio compilado."""
+"""Comprobar fuentes QMD, notebooks generados, tests y recursos de la web."""
+from copy import deepcopy
 from pathlib import Path
 import contextlib
-import io
-import json
+import hashlib
 from html.parser import HTMLParser
-from urllib.parse import urlsplit, unquote
-import nbformat
+import io
+from urllib.parse import unquote, urlsplit
 
-root = Path(__file__).resolve().parents[1]
-assert len(list((root/'src/01_teoria').glob('teoria-*.qmd'))) == 13
-assert len(list((root/'src/04_tareas').glob('tarea-*.qmd'))) == 4
-notebooks = sorted((root/'notebooks').glob('*.ipynb'))
-assert len(notebooks) == 13
-for path in notebooks:
-    nb = nbformat.read(path, as_version=4)
-    nbformat.validate(nb)
-    assert all(c.execution_count is None and not c.outputs for c in nb.cells if c.cell_type == 'code')
-    assert path.read_bytes() == (root/'_output/downloads'/path.name).read_bytes()
-    page = (root/'_output/src/03_practicas'/(path.stem+'.html')).read_text()
-    assert 'Descargar Notebook' in page and 'Abrir en el navegador' in page
-    assert (root/'_output/lite/files'/path.name).is_file()
-nb = nbformat.read(notebooks[0], as_version=4)
-code_cells = [c.source for c in nb.cells if c.cell_type == 'code']
-for solution, expected in [(code_cells[0],False), ('def sumar(a,b): return a-b',False), ('def sumar(a,b): return a+b',True)]:
-    ns = {}
+import nbformat
+import yaml
+
+from generate import FRONT_MATTER
+
+ROOT = Path(__file__).resolve().parents[1]
+OUTPUT = ROOT / '_output'
+sources = sorted((ROOT / 'src/03_practicas').glob('practica-*.qmd'))
+assert sources, 'No hay prácticas QMD'
+assert not (ROOT / 'notebooks').exists(), 'Solo los QMD deben ser fuentes de prácticas'
+metadata = yaml.safe_load((ROOT / 'src/03_practicas/_metadata.yml').read_text())
+assert metadata['execute']['enabled'] is False, 'Los ejercicios no deben ejecutarse al publicar'
+names = {source.stem + '.ipynb' for source in sources}
+for folder in (ROOT / 'downloads', ROOT / 'build/lite-content', OUTPUT / 'downloads', OUTPUT / 'lite/files'):
+    assert {path.name for path in folder.glob('practica-*.ipynb')} == names, folder
+for source in sources:
+    notebook_path = ROOT / 'downloads' / (source.stem + '.ipynb')
+    notebook = nbformat.read(notebook_path, as_version=4)
+    nbformat.validate(notebook)
+    assert notebook.metadata.quarto_source.sha256 == hashlib.sha256(source.read_bytes()).hexdigest(), source
+    title = yaml.safe_load(FRONT_MATTER.match(source.read_text()).group(1))['title']
+    assert notebook.cells[0].source == '# ' + title, source
+    assert 'path' not in notebook.metadata.kernelspec, 'No publicar rutas del equipo'
+    assert all(c.execution_count is None and not c.outputs for c in notebook.cells if c.cell_type == 'code')
+    assert not any('practice-actions' in c.source or 'Dónde ejecutar el código' in c.source for c in notebook.cells)
+    assert notebook_path.read_bytes() == (OUTPUT / 'downloads' / notebook_path.name).read_bytes()
+    expected = deepcopy(notebook)
+    expected.metadata['kernelspec'] = {'name': 'python', 'display_name': 'Python (Pyodide)', 'language': 'python'}
+    for folder in (ROOT / 'build/lite-content', OUTPUT / 'lite/files'):
+        actual = nbformat.read(folder / notebook_path.name, as_version=4)
+        nbformat.validate(actual)
+        assert actual == expected, (source, folder)
+
+notebook = nbformat.read(ROOT / 'downloads/practica-01.ipynb', as_version=4)
+cells = [cell.source for cell in notebook.cells if cell.cell_type == 'code']
+for solution, expected in [(cells[0], False), ('def sumar(a,b): return a-b', False), ('def sumar(a,b): return a+b', True)]:
+    namespace = {}
     with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
-        exec(solution,ns)
-        exec(code_cells[1],ns)
-    assert ns['resultado'].wasSuccessful() is expected
+        exec(solution, namespace)
+        exec(cells[1], namespace)
+    assert namespace['resultado'].wasSuccessful() is expected
+
+
 class Links(HTMLParser):
     def __init__(self):
-        super().__init__(); self.links=[]; self.anchors=[]
-    def handle_starttag(self,tag,attrs):
-        if tag == 'a': self.anchors.append(dict(attrs))
-        for k,v in attrs:
-            if k in ('href','src') and v: self.links.append(v)
-output = root/'_output'
-checked=0
-for page in [output/'index.html', *output.glob('src/**/*.html')]:
-    parser=Links(); parser.feed(page.read_text())
+        super().__init__()
+        self.links = []
+        self.anchors = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == 'a':
+            self.anchors.append(dict(attrs))
+        for key, value in attrs:
+            if key in ('href', 'src') and value:
+                self.links.append(value)
+
+
+checked = 0
+for page in [OUTPUT / 'index.html', *OUTPUT.glob('src/**/*.html')]:
+    parser = Links()
+    parser.feed(page.read_text())
     if page.parent.name == '01_teoria' and not page.name.endswith('.reveal.html'):
-        # La teoría debe conservar su diseño aunque no se descarguen CSS externos.
-        assert not any(urlsplit(link).path.endswith('.css')
-                       for link in parser.links if not link.startswith('data:')), page
+        assert not any(urlsplit(link).path.endswith('.css') for link in parser.links if not link.startswith('data:')), page
     if page.parent.name == '03_practicas':
-        notebook = page.stem + '.ipynb'
-        assert any(a.get('download') == notebook and
-                   a.get('href') == '../../downloads/' + notebook
-                   for a in parser.anchors), f'Falta descarga real: {page}'
+        notebook_name = page.stem + '.ipynb'
+        assert any(a.get('download') == notebook_name and a.get('href') == '../../downloads/' + notebook_name
+                   and 'btn-primary' in a.get('class', '') for a in parser.anchors), page
+        assert any(a.get('href') == '../../lite/lab/index.html?path=' + notebook_name
+                   and 'btn-primary' in a.get('class', '') for a in parser.anchors), page
+        assert 'Descargar Notebook' in page.read_text(), page
     for href in parser.links:
-        u=urlsplit(href)
-        if u.scheme or u.netloc or not u.path: continue
-        # Todos los enlaces deben permanecer relativos al repositorio.
-        assert not u.path.startswith('/'), (page,href)
-        target=(page.parent/unquote(u.path)).resolve()
-        assert target.is_relative_to(output.resolve()), (page,href)
-        assert target.exists(), (page,href,target)
-        checked+=1
-print(f'OK: 13 teorías, 13 notebooks válidos, 4 tareas; tests pendiente/incorrecto/correcto; {checked} enlaces y recursos relativos existentes.')
+        url = urlsplit(href)
+        if url.scheme or url.netloc or not url.path:
+            continue
+        assert not url.path.startswith('/'), (page, href)
+        target = (page.parent / unquote(url.path)).resolve()
+        assert target.is_relative_to(OUTPUT.resolve()) and target.exists(), (page, href, target)
+        checked += 1
+print(f'OK: {len(sources)} prácticas QMD y notebooks coherentes; tests pendiente/incorrecto/correcto; {checked} enlaces y recursos existentes.')

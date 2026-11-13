@@ -9,7 +9,6 @@
 /listings.json
 /src/**/*.html
 /src/**/site_libs/
-/src/03_practicas/*.qmd
 
 # Documentación interna y herramientas locales de validación.
 /docs/

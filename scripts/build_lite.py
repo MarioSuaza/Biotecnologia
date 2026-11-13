@@ -7,10 +7,14 @@ import sys
 
 root = Path(__file__).resolve().parents[1]
 out = root / "_output/lite"
-# En render incremental/preview conservar Lite; actualizarlo con render completo.
+# En preview reutilizar Lite solo cuando sus notebooks siguen siendo los actuales.
 if os.environ.get("QUARTO_PROJECT_OUTPUT_DIR") and not os.environ.get("QUARTO_PROJECT_RENDER_ALL") and (out / "lab/index.html").exists():
-    print("Lite existente: usa quarto render para actualizar sus notebooks.")
-    sys.exit(0)
+    sources = {path.name: path.read_bytes() for path in (root / "build/lite-content").glob("*.ipynb")}
+    published = {path.name: path.read_bytes() for path in (out / "files").glob("*.ipynb")}
+    config = root / "lite/jupyter-lite.json"
+    if sources == published and config.stat().st_mtime <= (out / "jupyter-lite.json").stat().st_mtime:
+        print("JupyterLite ya contiene los notebooks actuales.")
+        sys.exit(0)
 if out.exists():
     shutil.rmtree(out)
 # La base doit conserva tareas de salidas borradas; no reutilizarla.

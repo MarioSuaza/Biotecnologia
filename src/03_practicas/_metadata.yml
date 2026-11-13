@@ -1,0 +1,6 @@
+format: html
+jupyter: python3
+execute:
+  enabled: false
+filters:
+  - ../_filters/practice-actions.lua

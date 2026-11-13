@@ -1,0 +1,25 @@
+---
+title: "Práctica 07"
+---
+
+## Objetivos
+
+[Pendiente de incorporar.]
+
+## Instrucciones y explicaciones
+
+[Pendiente de desarrollar.]
+
+```{python}
+# Espacio para resolver los futuros ejercicios.
+```
+
+## Pruebas unitarias
+
+[Pendiente de definir según los ejercicios.]
+
+Ejecuta las celdas de arriba abajo con Shift+Enter. Cuando se añadan tests, OK indicará que pasan y FAIL/ERROR requerirá revisar el código.
+
+```{python}
+# Pendiente: añadir pruebas de autocomprobación con unittest.
+```

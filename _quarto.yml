@@ -8,9 +8,6 @@ project:
   preview:
     port: 7777
     browser: false
-  # This is a legacy function for including PDFs in the index
-  # resources:
-    # - 'src/**/*.pdf'
   output-dir: _output
   pre-render:
     - python3 scripts/generate.py
