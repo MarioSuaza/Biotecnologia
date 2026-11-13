@@ -1,0 +1,13 @@
+title: Tldraw
+author: SureSRM
+version: 1.0.0
+quarto-required: ">=1.5.0"
+contributes:
+  revealjs-plugins:
+    - name: RevealTldraw
+      script:
+        - index.js
+        - bind-func.js
+      stylesheet:
+        - index.css
+

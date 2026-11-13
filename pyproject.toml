@@ -1,0 +1,9 @@
+[project]
+name = "plantilla-curso-quarto"
+version = "0.1.0"
+description = "Curso Quarto con notebooks y JupyterLite"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.ruff]
+line-length = 88

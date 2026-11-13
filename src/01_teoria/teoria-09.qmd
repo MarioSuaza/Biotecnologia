@@ -1,0 +1,17 @@
+---
+title: "Clase de teoría 09"
+subtitle: "Título pendiente"
+format: html
+---
+
+## Objetivos
+
+[Pendiente de incorporar.]
+
+## Contenido
+
+[Pendiente de desarrollar.]
+
+## Actividades y recursos
+
+[Pendiente de incorporar.]

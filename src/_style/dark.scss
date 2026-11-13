@@ -1,0 +1,66 @@
+/*-- scss:defaults --*/
+// Base document colors
+
+$background-color: #111;
+$text: white;
+$unizar: #6f9ef7;
+$unizar-dark: #2d4063;
+
+body {
+  background-color: $background-color !important;
+  color: $text !important;
+}
+
+nav {
+  background-color: $background-color !important;
+}
+
+div.footer {
+  background-color: $unizar-dark !important;
+}
+
+// Fake codeblocks
+.line-block {
+  color: $text !important;
+  background-color: #333 !important;
+}
+
+code {
+  background-color: #333 !important;
+  color: $text !important;
+
+  // TODO: Fix code highlight colors
+  span {
+    color: $text !important;
+  }
+}
+
+div.sourceCode {
+  background-color: #333 !important;
+}
+
+b,
+strong {
+  color: $unizar !important;
+}
+
+a {
+  color: $unizar !important;
+}
+
+.reveal {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  p,
+  li {
+    color: white !important;
+  }
+}
+
+details>summary {
+  color: #AAA !important;
+}

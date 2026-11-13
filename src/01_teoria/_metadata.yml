@@ -1,0 +1,5 @@
+format:
+    html:
+        include-after-body: ../_includes/presentation-link.html
+    revealjs:
+        output-ext:  "reveal.html"

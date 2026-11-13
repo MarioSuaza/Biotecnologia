@@ -1,0 +1,112 @@
+lang: es
+project:
+  title: Nuevo curso
+  type: website
+  render: 
+    - index.qmd
+    - 'src/**/*.qmd'
+  preview:
+    port: 7777
+    browser: false
+  # This is a legacy function for including PDFs in the index
+  # resources:
+    # - 'src/**/*.pdf'
+  output-dir: _output
+  pre-render:
+    - python3 scripts/generate.py
+  post-render:
+    - python3 scripts/build_lite.py
+  resources:
+    - downloads/**
+    - .nojekyll
+
+website:
+  sidebar:
+    collapse-level: 1
+    contents:
+      - href: index.qmd
+        text: Inicio
+      - section: Teoría
+        contents: src/01_teoria/*.qmd
+      - section: Prácticas
+        contents: src/03_practicas/*.qmd
+      - section: Tareas
+        contents: src/04_tareas/*.qmd
+  search:
+    location: sidebar
+    type: overlay
+
+brand:
+  light: ./_brand_light.yml
+  dark: ./_brand_dark.yml
+
+format:
+  html:
+    theme: [src/_style/fix.scss]
+    # theme: 
+    #   light: [default, src/_style/custom.scss]
+    #   dark:  [default, src/_style/custom.scss, src/_style/dark.scss]
+    code-copy: true
+    code-line-numbers: true
+    toc: true
+    toc-location: right
+    toc-expand: 3
+    number-sections: true
+    anchor-sections: true
+    link-external-icon: true
+    callout-appearance: simple
+  revealjs:
+    # Format Options
+    revealjs-plugins:
+      - tldraw
+    date-format: long
+    theme: [src/_style/fix.scss]
+    # theme: [default, src/_style/custom.scss]
+    # Slides
+    incremental: false
+    slide-number: true
+    self-contained-math: true
+    title-slide-attributes:
+      data-background-image: src/_style/logos/unizar-black.svg
+      data-background-size: auto 600px
+      data-background-opacity: "0.30"
+      data-background-color: "#223d71"
+    code-copy: true
+    callout-appearance: simple
+    # Slide Content
+    logo: /src/_style/logos/unizar-diis-white.svg
+    smaller: true
+    # Slide Tools
+    overview: true
+    chalkboard: false
+    menu: true
+    # Navigation
+    history: false
+    progress: true
+    touch: true
+    # Code
+    code-link: true
+    code-overflow: wrap
+    highlight-style: a11y
+    # Execution
+    execute:
+      echo: true
+    # Footnotes
+    footnotes-hover: true
+    reference-links: true
+    reference-location: document
+    footer: "Nuevo curso"
+    link-external-icon: true
+    smooth-scroll: true
+    link-external-newwindow: true
+    mermaid: 
+      theme: neutral
+      format: svg
+  # pdf:
+  #   pdf-engine: lualatex
+  #   documentclass: scrreprt
+  #   fontsize: 15pt
+  #   toc: false
+  #   number-sections: true
+  #   colorlinks: true
+  #   highlight-style: github

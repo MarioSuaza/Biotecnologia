@@ -1,0 +1,16 @@
+---
+title: Nuevo curso
+format: html
+listing:
+  template: index.ejs
+  fields: [title, subtitle]
+  sort: path
+  contents:
+    - src/**/*.qmd
+---
+
+Plantilla para desarrollar un curso nuevo: **13 clases de teoría**, **13 prácticas** y **4 tareas**.
+
+Accede a cada sesión desde el índice o el menú lateral. Las prácticas incluyen un notebook descargable y un entorno Python en el navegador. La práctica 01 permite comprobar el flujo completo; los demás materiales están pendientes de desarrollo.
+
+Los tests son de autocomprobación: no envían resultados al profesor.

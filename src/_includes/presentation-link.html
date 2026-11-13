@@ -1,0 +1,11 @@
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const slides = document.querySelector('.quarto-alternate-formats a[href$=".reveal.html"]');
+  if (!slides) return;
+  const button = document.createElement("a");
+  button.href = slides.getAttribute("href");
+  button.className = "btn btn-primary course-presentation";
+  button.textContent = "Ver diapositivas";
+  document.body.append(button);
+});
+</script>

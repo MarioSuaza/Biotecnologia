@@ -1,0 +1,17 @@
+/_output/
+/.quarto/
+/.venv/
+/build/
+/downloads/
+/src/03_practicas/*.qmd
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.DS_Store
+.vscode/
+.env
+.env.*
+
+**/*.quarto_ipynb
+
+.jupyterlite*.db*

@@ -1,0 +1,132 @@
+/*-- scss:rules --*/
+
+.course-presentation {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1000;
+  box-shadow: 0 2px 8px #0003;
+}
+
+@media print {
+  .course-presentation { display: none; }
+}
+
+strong,
+b {
+  color: var(--brand-unizar);
+}
+
+div.sourceCode {
+  border: 1px solid var(--brand-back2);
+  border-radius: .25rem;
+}
+
+// Fake codeblocks
+.line-block {
+  font-family: monospace;
+  /* font-size: ver(--brand- */
+  color: var(--brand-front);
+  line-height: 1.3;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  background-color: var(--brand-back2);
+  border: 1px solid var(--brand-back2);
+  border-radius: .25rem;
+
+  strong {
+    text-decoration: underline;
+  }
+}
+
+// horizontal line
+hr {
+  display: none;
+}
+
+
+.reveal {
+  .slides {
+    h2::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 8px;
+      /* Or the desired thickness */
+      background-color: var(--brand-unizar);
+      margin-top: 10px;
+      /* Space between the h1 and the hr */
+      margin-bottom: 20px;
+      /* Space below the hr */
+      /* border-radius: 4px; */
+    }
+  }
+}
+
+
+// ------------------------------
+
+
+code {
+  span {
+    color: #545454;
+    .al { color: #A5D; }
+    /* Alert */
+    .an { color: #696969; }
+    /* Annotation */
+    .at { color: #a55a00; }
+    /* Attribute */
+    .bn { color: #A5D; }
+    /* BaseN */
+    .bu {}
+    /* BuiltIn */
+    .cf { color: #d91e18; }
+    /* ControlFlow */
+    .ch { color: #008000; }
+    /* Char */
+    .cn { color: #d91e18; }
+    /* Constant */
+    .co { color: #696969; }
+    /* Comment */
+    .cv { color: #696969; font-style: italic; }
+    /* CommentVar */
+    .do { color: #696969; font-style: italic; }
+    /* Documentation */
+    .dt { color: #A5D; }
+    /* DataType */
+    .dv { color: #A5D; }
+    /* DecVal */
+    .er { color: #A5D; }
+    /* Error */
+    .ex {} /* Extension */
+    .fl { color: #a55a00; }
+    /* Float */
+    .fu { color: #06287e; }
+    /* Function */
+    .im {}
+    /* Import */
+    .in { color: #696969; }
+    /* Information */
+    .kw { color: #d91e18; }
+    /* Keyword */
+    .op { color: #00769e; }
+    /* Operator */
+    .ot { color: #d91e18; }
+    /* Other */
+    .pp { color: #A5D; }
+    /* Preprocessor */
+    .sc { color: #00769e; }
+    /* SpecialChar */
+    .ss { color: #008000; }
+    /* SpecialString */
+    .st { color: #008000; }
+    /* String */
+    .va { color: #a55a00; }
+    /* Variable */
+    .vs { color: #008000; }
+    /* VerbatimString */
+    .wa { color: #696969; font-style: italic;
+    }
+    /* Warning */
+  }
+}

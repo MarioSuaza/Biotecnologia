@@ -1,0 +1,72 @@
+meta:
+  name:
+    short: Nuevo curso
+    full: Nuevo curso
+
+color:
+  palette:
+    back: "#FFFFFF"
+    back2: "#EEEEEE"
+    front: "#232628"
+    front2: "#000000"
+    unizar: "#223d71"
+    green: "#78A540"
+    blue: "#003660"
+    orange: "#DF8073"
+    red: "#900C3F"
+  background: back
+  foreground: front
+  primary: unizar
+  secondary: unizar
+  tertiary: unizar
+  success: green
+  info: blue
+  warning: orange
+  danger: red
+
+logo:
+  images:
+    logo_uz:
+      path: ./src/_style/logos/logo_uz.svg
+      alt: "Unizar logo, black"
+    unizar-black:
+      path: ./src/_style/logos/unizar-black.svg
+      alt: "Unizar logo, black"
+    unizar-diis-white:
+      path: ./src/_style/logos/unizar-diis-white.svg
+      alt: "Unizar logo, black"
+  small: unizar-diis-white
+  medium: logo_uz
+  large: unizar-black
+
+typography:
+  fonts:
+    - family: Nunito
+      source: google
+      weight: [300,800]
+      display: swap
+    - family: Source Sans 3
+      source: google
+      display: swap
+    - family: Sanchez
+      source: google
+      display: swap
+    - family: Roboto Mono
+      source: google
+      weight: [300,400]
+      display: swap
+  base: 
+    family: Nunito
+  headings:
+    family: Source Sans 3
+  link:
+    decoration: underline
+  monospace:
+    family: Roboto Mono
+  monospace-inline:
+    background-color: back2
+    color: unizar
+  monospace-block:
+    background-color: back
+    size: 0.8em
+    
