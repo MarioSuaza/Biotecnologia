@@ -2,6 +2,7 @@
 from copy import deepcopy
 from pathlib import Path
 import hashlib
+import json
 import os
 import re
 import subprocess
@@ -28,6 +29,12 @@ def generate():
     stems = {source.stem for source in sources}
     downloads = ROOT / "downloads"
     lite = ROOT / "build/lite-content"
+    workspaces = ROOT / "build/lite-workspaces"
+    workspaces.mkdir(parents=True, exist_ok=True)
+    layout = json.loads((ROOT / "lite/workspace-template.json").read_text())
+    for path in workspaces.glob("curso-practica-*.jupyterlab-workspace"):
+        if path.stem.removeprefix("curso-") not in stems:
+            path.unlink()
     for folder in (downloads, lite):
         folder.mkdir(parents=True, exist_ok=True)
         for path in folder.glob("practica-*.ipynb"):
@@ -75,6 +82,19 @@ def generate():
                 "name": "python", "display_name": "Python (Pyodide)", "language": "python",
             }
             write_notebook(lite / converted.name, browser_notebook)
+            notebook_id = "notebook:" + converted.name
+            workspace = {
+                "metadata": {"id": "curso-" + source.stem},
+                "data": {
+                    "layout-restorer:data": deepcopy(layout),
+                    notebook_id: {"data": {"path": converted.name, "factory": "Notebook"}},
+                },
+            }
+            workspace["data"]["layout-restorer:data"]["main"]["current"] = notebook_id
+            path = workspaces / ("curso-" + source.stem + ".jupyterlab-workspace")
+            text = json.dumps(workspace, ensure_ascii=False, indent=2) + "\n"
+            if not path.exists() or path.read_text() != text:
+                path.write_text(text)
     print(f"Notebooks generados desde QMD, sin ejecución: {len(sources)}.")
 
 

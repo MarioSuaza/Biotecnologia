@@ -5,6 +5,7 @@ import contextlib
 import hashlib
 from html.parser import HTMLParser
 import io
+import json
 from urllib.parse import unquote, urlsplit
 
 import nbformat
@@ -20,6 +21,9 @@ assert not (ROOT / 'notebooks').exists(), 'Solo los QMD deben ser fuentes de pr√
 metadata = yaml.safe_load((ROOT / 'src/03_practicas/_metadata.yml').read_text())
 assert metadata['execute']['enabled'] is False, 'Los ejercicios no deben ejecutarse al publicar'
 names = {source.stem + '.ipynb' for source in sources}
+workspaces = json.loads((OUTPUT / 'lite/api/workspaces/all.json').read_text())
+assert '"workspacesAllJsonFile"' in (OUTPUT / 'lite/lab/index.html').read_text()
+assert set(workspaces) == {'curso-' + source.stem for source in sources}
 for folder in (ROOT / 'downloads', ROOT / 'build/lite-content', OUTPUT / 'downloads', OUTPUT / 'lite/files'):
     assert {path.name for path in folder.glob('practica-*.ipynb')} == names, folder
 for source in sources:
@@ -28,6 +32,11 @@ for source in sources:
     nbformat.validate(notebook)
     assert notebook.metadata.quarto_source.sha256 == hashlib.sha256(source.read_bytes()).hexdigest(), source
     title = yaml.safe_load(FRONT_MATTER.match(source.read_text()).group(1))['title']
+    workspace = workspaces['curso-' + source.stem]['data']
+    assert set(workspace) == {'layout-restorer:data', 'notebook:' + notebook_path.name}
+    layout = workspace['layout-restorer:data']
+    assert layout['left']['collapsed'] is True and layout['left']['visible'] is False
+    assert layout['main']['current'] == 'notebook:' + notebook_path.name
     assert notebook.cells[0].source == '# ' + title, source
     assert 'path' not in notebook.metadata.kernelspec, 'No publicar rutas del equipo'
     assert all(c.execution_count is None and not c.outputs for c in notebook.cells if c.cell_type == 'code')
@@ -90,7 +99,7 @@ for page in [OUTPUT / 'index.html', *OUTPUT.glob('src/**/*.html')]:
         notebook_name = page.stem + '.ipynb'
         assert any(a.get('download') == notebook_name and a.get('href') == '../../downloads/' + notebook_name
                    and 'btn-primary' in a.get('class', '') for a in parser.anchors), page
-        assert any(a.get('href') == '../../lite/lab/index.html?path=' + notebook_name
+        assert any(a.get('href') == '../../lite/lab/index.html?workspace=curso-' + page.stem + '&mode=single-document'
                    and 'btn-primary' in a.get('class', '') for a in parser.anchors), page
         assert 'Descargar Notebook' in page.read_text(), page
     for href in parser.links:

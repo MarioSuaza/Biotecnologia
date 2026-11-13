@@ -1,0 +1,18 @@
+{
+  "main": { "dock": null },
+  "down": { "size": 0, "collapsed": true, "widgets": [] },
+  "left": {
+    "collapsed": true,
+    "visible": false,
+    "widgets": ["filebrowser", "running-sessions", "@jupyterlab/toc:plugin"],
+    "widgetStates": {}
+  },
+  "right": {
+    "collapsed": true,
+    "visible": false,
+    "widgets": ["jp-property-inspector"],
+    "widgetStates": {}
+  },
+  "relativeSizes": [0, 1, 0],
+  "top": { "simpleVisibility": true }
+}

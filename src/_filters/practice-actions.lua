@@ -8,7 +8,7 @@ function Pandoc(doc)
   local controls = string.format([[
 <div class="practice-actions">
 <a class="btn btn-primary" href="../../downloads/%s" download="%s">Descargar Notebook</a>
-<a class="btn btn-primary" href="../../lite/lab/index.html?path=%s" target="_blank" rel="noopener">Abrir en el navegador</a>
+<a class="btn btn-primary" href="../../lite/lab/index.html?workspace=curso-%s&amp;mode=single-document" target="_blank" rel="noopener">Abrir en el navegador</a>
 </div>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header"><div class="callout-title-container">Dónde ejecutar el código</div></div>
@@ -21,7 +21,7 @@ tu respuesta, usa <strong>Run → Run All Cells</strong>. Los resultados aparece
 de los tests. Descarga tu copia de trabajo para conservarla fuera del navegador.</p>
 </div>
 </div>
-]], notebook, notebook, notebook)
+]], notebook, notebook, stem)
   doc.blocks:insert(1, pandoc.RawBlock("html", controls))
   return doc
 end

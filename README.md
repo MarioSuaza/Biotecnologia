@@ -65,7 +65,7 @@ python -m http.server 8000 --directory _output --bind 127.0.0.1
 Abre <http://127.0.0.1:8000/> y comprueba la práctica:
 
 - **Descargar Notebook:** descarga el notebook generado desde el `.qmd`. También puedes abrir `downloads/practica-01.ipynb` en VS Code.
-- **Abrir en el navegador:** abre JupyterLite. Ejecuta las celdas con **Shift+Enter** o **Run → Run All Cells**.
+- **Abrir en el navegador:** abre la práctica elegida en JupyterLite, en modo documento único y con el explorador cerrado. Ejecuta las celdas con **Shift+Enter** o **Run → Run All Cells**. Las otras prácticas siguen disponibles en el entorno; esta vista simplifica el trabajo y conserva los archivos guardados.
 - Para conservar una respuesta del alumno, guarda y usa **File → Download**. Guardar en el navegador no envía el trabajo al profesor.
 
 Si encuentras un error, corrígelo en el **`.qmd`** y vuelve a compilar. Los cambios hechos en el notebook de prueba no se trasladan al `.qmd`. Detén el servidor con **Ctrl+C** cuando termines.
